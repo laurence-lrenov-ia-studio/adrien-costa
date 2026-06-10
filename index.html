@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adrien Costa Carrelage — Carte de visite</title>
+  <meta name="description" content="Carte de visite digitale Adrien Costa Carrelage — pose neuve et rénovation." />
+  <style>
+    :root {
+      --navy:#07182b;
+      --navy2:#0d2239;
+      --blue:#1057ad;
+      --blue2:#174a8f;
+      --ink:#0c1724;
+      --muted:#6f747b;
+      --paper:#f4f1ea;
+      --card:#fbfaf6;
+      --stone:#e8e3da;
+      --line:#d7d0c6;
+      --white:#ffffff;
+      --shadow:0 24px 60px rgba(7,24,43,.16);
+    }
+
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      margin:0;
+      min-height:100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 18% 8%, rgba(255,255,255,.95), transparent 32%),
+        radial-gradient(circle at 82% 20%, rgba(16,87,173,.10), transparent 28%),
+        linear-gradient(135deg, #e4dfd6 0%, #f7f5f0 38%, #ded9d0 100%);
+      padding:24px;
+    }
+
+    .page {
+      width:min(1120px,100%);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:26px;
+      align-items:stretch;
+    }
+
+    .panel {
+      background:rgba(251,250,246,.94);
+      border:1px solid rgba(215,208,198,.95);
+      border-radius:30px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .panel::before {
+      content:"";
+      position:absolute;
+      inset:-8%;
+      background:
+        linear-gradient(118deg, transparent 0 53%, rgba(16,87,173,.10) 53.4% 57%, transparent 57.4%),
+        radial-gradient(circle at 80% 10%, rgba(7,24,43,.06), transparent 28%);
+      pointer-events:none;
+    }
+
+    .landing {
+      min-height:860px;
+      padding:40px;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-start;
+    }
+
+    .logo-card {
+      position:relative;
+      background:#fff;
+      border:1px solid rgba(215,208,198,.98);
+      border-radius:18px;
+      padding:18px 22px;
+      box-shadow:0 16px 36px rgba(7,24,43,.12);
+      z-index:1;
+    }
+
+    .logo-card img {
+      display:block;
+      width:100%;
+      height:auto;
+    }
+
+    .intro {
+      position:relative;
+      z-index:1;
+      margin-top:26px;
+      border-left:3px solid var(--blue);
+      padding-left:18px;
+    }
+
+    .location {
+      margin:0 0 10px;
+      letter-spacing:.34em;
+      text-transform:uppercase;
+      color:var(--blue2);
+      font-weight:700;
+      font-size:12px;
+    }
+
+    h1 {
+      margin:0;
+      font-family:Georgia, "Times New Roman", serif;
+      font-size:clamp(46px,6vw,72px);
+      line-height:.96;
+      font-weight:400;
+      color:var(--navy);
+    }
+
+    .tagline {
+      margin:16px 0 0;
+      letter-spacing:.34em;
+      text-transform:uppercase;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .visual-space {
+      position:relative;
+      z-index:1;
+      margin:38px 0 22px;
+      border-radius:22px;
+      overflow:hidden;
+      border:1px solid rgba(215,208,198,.92);
+      box-shadow:0 18px 42px rgba(7,24,43,.13);
+      background:#111;
+    }
+
+    .visual-space img {
+      display:block;
+      width:100%;
+      height:auto;
+      aspect-ratio: 4 / 3;
+      object-fit:cover;
+    }
+
+    .enter {
+      position:relative;
+      margin-top:28px;
+      z-index:1;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      text-decoration:none;
+      color:#fff;
+      background:linear-gradient(135deg, var(--navy), var(--blue));
+      border-radius:14px;
+      padding:17px 18px;
+      box-shadow:0 14px 28px rgba(16,87,173,.22);
+      font-weight:700;
+      letter-spacing:.04em;
+    }
+
+    .enter span:last-child {
+      font-size:22px;
+      font-family:Georgia, "Times New Roman", serif;
+    }
+
+    .details {
+      padding:40px 38px;
+      min-height:860px;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-start;
+    }
+
+    .mini {
+      position:relative;
+      z-index:1;
+      text-align:center;
+      margin-bottom:28px;
+    }
+
+    .mini-logo {
+      width:100%;
+      max-width:330px;
+      margin:0 auto 20px;
+      background:#fff;
+      border:1px solid rgba(215,208,198,.96);
+      border-radius:16px;
+      padding:12px 16px;
+      box-shadow:0 14px 30px rgba(7,24,43,.10);
+    }
+
+    .mini-logo img {
+      display:block;
+      width:100%;
+      height:auto;
+    }
+
+    .name {
+      margin:0;
+      font-family:Georgia, "Times New Roman", serif;
+      letter-spacing:.10em;
+      font-size:34px;
+      font-weight:400;
+      color:var(--navy);
+    }
+
+    .role {
+      margin:12px 0 0;
+      letter-spacing:.32em;
+      text-transform:uppercase;
+      color:var(--blue2);
+      font-weight:700;
+      font-size:12px;
+    }
+
+    .special {
+      position:relative;
+      z-index:1;
+      background:#efede7;
+      border-left:3px solid var(--navy);
+      padding:20px 22px;
+      margin-bottom:24px;
+    }
+
+    .special h2, .gallery h2 {
+      margin:0 0 12px;
+      font-size:12px;
+      letter-spacing:.32em;
+      text-transform:uppercase;
+      color:var(--navy);
+    }
+
+    .special p {
+      margin:0;
+      line-height:1.65;
+      color:#20252b;
+      font-size:15px;
+    }
+
+    .special em {
+      display:block;
+      margin-top:16px;
+      padding-top:14px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+    }
+
+    .actions {
+      position:relative;
+      z-index:1;
+      display:grid;
+      gap:12px;
+    }
+
+    .btn {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      text-decoration:none;
+      color:var(--navy);
+      background:#fff;
+      border:1px solid var(--line);
+      padding:16px 16px;
+      min-height:64px;
+      transition:.18s ease;
+      box-shadow:0 8px 18px rgba(7,24,43,.04);
+    }
+
+    .btn:hover {
+      transform:translateY(-1px);
+      border-color:var(--blue);
+      box-shadow:0 12px 24px rgba(7,24,43,.10);
+    }
+
+    .left {
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width:0;
+    }
+
+    .icon {
+      width:38px;
+      height:38px;
+      flex:0 0 38px;
+      display:grid;
+      place-items:center;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.92), rgba(231,225,215,.95));
+      border:1px solid rgba(215,208,198,.92);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.55), 0 6px 14px rgba(7,24,43,.08);
+    }
+
+    .icon svg {
+      width:20px;
+      height:20px;
+      fill:none;
+      stroke:var(--blue2);
+      stroke-width:1.8;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+
+    .btn strong {
+      display:block;
+      font-size:16px;
+    }
+
+    .btn small {
+      display:block;
+      margin-top:4px;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:400;
+    }
+
+    .arrow {
+      color:var(--blue);
+      font-size:22px;
+      flex:0 0 auto;
+      font-family:Georgia, "Times New Roman", serif;
+    }
+
+    .gallery {
+      position:relative;
+      z-index:1;
+      margin-top:16px;
+      padding:18px;
+      background:rgba(239,237,231,.78);
+      border:1px solid var(--line);
+      text-align:left;
+    }
+
+    .gallery p {
+      margin:0;
+      color:var(--muted);
+      line-height:1.55;
+      font-size:13px;
+    }
+
+    @media(max-width:900px) {
+      body{padding:0;}
+      .page{grid-template-columns:1fr;gap:0;}
+      .panel{border-radius:0;box-shadow:none;border-left:none;border-right:none;}
+      .landing,.details{min-height:auto;padding:24px 18px;}
+      .visual-space{margin:30px 0 20px;}
+      h1{font-size:48px;}
+      .name{font-size:30px;}
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="panel landing" aria-label="Accueil carte de visite">
+      <div>
+        <div class="logo-card">
+          <img src="logo.png" alt="SARL Adrien Costa Carrelage" />
+        </div>
+
+        <div class="intro">
+          <p class="location">Carrelage · Pauillac · Médoc</p>
+          <h1>Adrien Costa</h1>
+          <p class="tagline">Pose neuve et rénovation</p>
+        </div>
+
+        <figure class="visual-space">
+          <img src="visuel-carte.png" alt="Réalisation carrelage et miroir rétroéclairé" />
+        </figure>
+
+        <a class="enter" href="#contact">
+          <span>Entrer sur la carte digitale</span>
+          <span>→</span>
+        </a>
+      </div>
+    </section>
+
+    <section id="contact" class="panel details" aria-label="Carte de visite digitale">
+      <div class="mini">
+        <div class="mini-logo">
+          <img src="logo.png" alt="SARL Adrien Costa Carrelage" />
+        </div>
+        <p class="name">ADRIEN COSTA</p>
+        <p class="role">Pose neuve et rénovation</p>
+      </div>
+
+      <div class="special">
+        <h2>Spécialités</h2>
+        <p>Sol, faïence, carrelage mural, zellige, tomette, terre cuite, marbre, travertin, carreaux de ciment, terrasse pose sur plots.</p>
+        <em>Pose neuve et rénovation · Châteaux viticoles · Clients professionnels · Clients particuliers</em>
+      </div>
+
+      <div class="actions">
+        <a class="btn" href="adrien-costa.vcf" download>
+          <span class="left"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12.2a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/><path d="M4.8 20.2c.7-3.8 3.4-6 7.2-6s6.5 2.2 7.2 6"/></svg></span><span><strong>Ajouter le contact</strong><small>vCard téléchargeable</small></span></span>
+          <span class="arrow">→</span>
+        </a>
+
+        <a class="btn" href="tel:+33668271987">
+          <span class="left"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.1 4.8 9.4 4l2.1 4.8-1.7 1.1c1 2.1 2.4 3.6 4.5 4.6l1.2-1.7 4.7 2.2-.8 2.3c-.4 1.1-1.5 1.8-2.7 1.6C10.4 18 5.9 13.6 5 7.2c-.2-1.1.5-2.1 2.1-2.4Z"/></svg></span><span><strong>Appeler</strong><small>06 68 27 19 87</small></span></span>
+          <span class="arrow">→</span>
+        </a>
+
+        <a class="btn" href="mailto:adrien.costa.ac@gmail.com?subject=Contact%20-%20Adrien%20Costa%20Carrelage">
+          <span class="left"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 6.5h15v11h-15z"/><path d="m5.2 7.2 6.8 5.3 6.8-5.3"/></svg></span><span><strong>Contacter par mail</strong><small>adrien.costa.ac@gmail.com</small></span></span>
+          <span class="arrow">→</span>
+        </a>
+
+        <a class="btn" href="#galerie-photos">
+          <span class="left"><span class="icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 5.5h15v13h-15z"/><path d="m6.5 16 4-4.2 3 3 2-2.1 2 3.3"/><path d="M15.7 9.2h.1"/></svg></span><span><strong>Galerie photos</strong><small>Particuliers · Campings · Châteaux</small></span></span>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+
+      <section id="galerie-photos" class="gallery">
+        <h2>Galerie photos</h2>
+        <p>Particuliers · Campings · Châteaux viticoles · Clients professionnels</p>
+      </section>
+    </section>
+  </main>
+</body>
+</html>
