@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galerie photos — Adrien Costa Carrelage</title>
+<style>
+:root{
+  --navy:#07182b; --blue:#1057ad; --blue2:#174a8f; --ink:#0c1724;
+  --muted:#6f747b; --line:#d7d0c6; --paper:#f4f1ea; --card:#fbfaf6;
+  --shadow:0 24px 60px rgba(7,24,43,.16);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; font-family:Arial, Helvetica, sans-serif; color:var(--ink);
+  background:radial-gradient(circle at 18% 8%, rgba(255,255,255,.95), transparent 32%),
+  radial-gradient(circle at 82% 20%, rgba(16,87,173,.10), transparent 28%),
+  linear-gradient(135deg,#e4dfd6 0%,#f7f5f0 38%,#ded9d0 100%);
+  padding:24px;
+}
+.page{
+  width:min(1180px,100%); margin:0 auto; background:rgba(251,250,246,.95);
+  border:1px solid rgba(215,208,198,.95); border-radius:30px; box-shadow:var(--shadow);
+  padding:34px;
+}
+.header{
+  display:flex; align-items:center; justify-content:space-between; gap:18px; margin-bottom:28px;
+  border-bottom:1px solid var(--line); padding-bottom:20px;
+}
+.logo{width:220px; max-width:45%; background:#fff; border:1px solid var(--line); border-radius:14px; padding:10px 14px}
+.logo img{display:block; width:100%; height:auto}
+h1{
+  margin:0; font-family:Georgia,"Times New Roman",serif; font-weight:400;
+  color:var(--navy); font-size:clamp(34px,5vw,56px); line-height:1;
+}
+.kicker{margin:10px 0 0; color:var(--blue2); letter-spacing:.28em; text-transform:uppercase; font-size:12px; font-weight:700}
+.back{
+  display:inline-flex; align-items:center; gap:10px; text-decoration:none; color:#fff;
+  background:linear-gradient(135deg,var(--navy),var(--blue)); padding:12px 16px; border-radius:12px;
+  font-weight:700; white-space:nowrap;
+}
+
+.tabs{display:flex; flex-wrap:wrap; gap:10px; margin:0 0 22px;}
+.tab{
+  border:1px solid var(--line); background:#fff; color:var(--navy);
+  padding:10px 13px; border-radius:999px; cursor:pointer; font-weight:700;
+  letter-spacing:.04em; box-shadow:0 8px 18px rgba(7,24,43,.05);
+}
+.tab.active{background:linear-gradient(135deg,var(--navy),var(--blue)); color:#fff; border-color:transparent;}
+.empty-gallery{
+  color:var(--muted); background:#efede7; border-left:3px solid var(--blue);
+  padding:14px 16px; margin:0 0 18px;
+}
+
+.gallery-grid{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px}
+.gallery-card{
+  background:#fff; border:1px solid rgba(215,208,198,.92); box-shadow:0 10px 22px rgba(7,24,43,.07); overflow:hidden;
+}
+.gallery-card a{display:block; background:#f3f0e9}
+.gallery-card img{width:100%; aspect-ratio:4/3; object-fit:cover; display:block}
+.gallery-caption{padding:13px 14px 15px}
+.gallery-type{margin:0 0 7px; color:var(--blue2); text-transform:uppercase; letter-spacing:.18em; font-size:10px; font-weight:700}
+.gallery-caption h3{margin:0; color:var(--navy); font-family:Georgia,"Times New Roman",serif; font-weight:400; font-size:20px; line-height:1.15}
+.gallery-caption p:last-child{margin:7px 0 0; color:var(--muted); font-size:13px; line-height:1.35}
+.book{
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin-top:8px;
+}
+.ref-card{
+  position:relative; min-height:128px; padding:22px 22px 20px 74px;
+  background:linear-gradient(90deg,#f1eee7,#fff);
+  border:1px solid var(--line); border-left:4px solid var(--blue);
+  box-shadow:0 12px 26px rgba(7,24,43,.07);
+}
+.ref-card::before{
+  content:attr(data-num); position:absolute; left:20px; top:20px;
+  color:var(--blue2); font-family:Georgia,"Times New Roman",serif; font-size:26px;
+}
+.ref-card h2{
+  margin:0; color:var(--navy); font-family:Georgia,"Times New Roman",serif;
+  font-weight:400; font-size:24px;
+}
+.ref-card p{margin:8px 0 0; color:var(--muted); line-height:1.45; font-size:14px}
+.intro{
+  max-width:760px; color:var(--muted); line-height:1.6; margin:0 0 24px;
+}
+@media(max-width:850px){
+  body{padding:0}
+  .page{border-radius:0; padding:22px 18px; min-height:100vh}
+  .header{align-items:flex-start; flex-direction:column}
+  .logo{max-width:100%; width:250px}
+  .gallery-grid,.book{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="header">
+    <div>
+      <h1>Galerie photos</h1>
+      <p class="kicker">Réalisations carrelage</p>
+    </div>
+    <div class="logo"><img src="logo.png" alt="SARL Adrien Costa Carrelage"></div>
+    <a class="back" href="index.html">← Retour carte</a>
+  </header>
+  <p class="intro">Une sélection de réalisations : propriétés viticoles, campings, clients professionnels, clients particuliers, terrasses et salles d’eau.</p>
+  
+  <nav class="tabs" aria-label="Filtres galerie">
+    <button class="tab active" data-target="all">Tout</button>
+    <button class="tab" data-target="particuliers">Particuliers</button>
+    <button class="tab" data-target="proprietes-viticoles">Propriétés viticoles</button>
+    <button class="tab" data-target="campings">Campings</button>
+  </nav>
+  <p class="empty-gallery" hidden>Aucune photo classée dans cette rubrique pour l’instant.</p>
+
+  <section class="gallery-grid">
+<article class="gallery-card" data-filter="campings">
+            <a href="galerie/proprietes-viticoles/proprietes-viticoles-camping-03.jpg" target="_blank" rel="noopener">
+              <img src="galerie/proprietes-viticoles/proprietes-viticoles-camping-03.jpg" alt="Camping — Propriétés viticoles" loading="lazy">
+            </a>
+            <div class="gallery-caption">
+              <p class="gallery-type">Campings</p>
+              <h3>Accueil camping</h3>
+              <p>Réalisation carrelage</p>
+            </div>
+          </article>
+          <article class="gallery-card" data-filter="campings">
+            <a href="galerie/proprietes-viticoles/proprietes-viticoles-camping-cuisine-02.jpg" target="_blank" rel="noopener">
+              <img src="galerie/proprietes-viticoles/proprietes-viticoles-camping-cuisine-02.jpg" alt="Camping Cuisine — Propriétés viticoles" loading="lazy">
+            </a>
+            <div class="gallery-caption">
+              <p class="gallery-type">Campings</p>
+              <h3>Cuisine camping</h3>
+              <p>Réalisation carrelage</p>
+            </div>
+          </article>
+          <article class="gallery-card" data-filter="proprietes-viticoles">
+            <a href="galerie/proprietes-viticoles/proprietes-viticoles-chai-gris-clair-04.jpg" target="_blank" rel="noopener">
+              <img src="galerie/proprietes-viticoles/proprietes-viticoles-chai-gris-clair-04.jpg" alt="Chai Gris Clair — Propriétés viticoles" loading="lazy">
+            </a>
+            <div class="gallery-caption">
+              <p class="gallery-type">Propriétés viticoles</p>
+              <h3>Chai Gris Clair</h3>
+              <p>Réalisation carrelage</p>
+            </div>
+          </article>
+          <article class="gallery-card" data-filter="proprietes-viticoles">
+            <a href="galerie/proprietes-viticoles/proprietes-viticoles-chai-gruaud-05.jpg" target="_blank" rel="noopener">
+              <img src="galerie/proprietes-viticoles/proprietes-viticoles-chai-gruaud-05.jpg" alt="Chai Gruaud  — Propriétés viticoles" loading="lazy">
+            </a>
+            <div class="gallery-caption">
+              <p class="gallery-type">Propriétés viticoles</p>
+              <h3>Chai Gruaud </h3>
+              <p>Réalisation carrelage</p>
+            </div>
+          </article>
+          <article class="gallery-card" data-filter="proprietes-viticoles">
+            <a href="galerie/proprietes-viticoles/proprietes-viticoles-chai-gruaud-2-06.jpg" target="_blank" rel="noopener">
+              <img src="galerie/proprietes-viticoles/proprietes-viticoles-chai-gruaud-2-06.jpg" alt="Chai Gruaud 2  — Propriétés viticoles" loading="lazy">
+            </a>
+            <div class="gallery-caption">
+              <p class="gallery-type">Propriétés viticoles</p>
+              <h3>Chai Gruaud 2 </h3>
+              <p>Réalisation carrelage</p>
+            </div>
+          </article>
+          <article class="gallery-card" data-filter="proprietes-viticoles">
+            <a href="galerie/proprietes-viticoles/proprietes-viticoles-chai-gruaud-3-07.jpg" target="_blank" rel="noopener">
+              <img src="galerie/proprietes-viticoles/proprietes-viticoles-chai-gruaud-3-07.jpg" alt="Chai Gruaud 3  — Propriétés viticoles" loading="lazy">
+            </a>
+            <div class="gallery-caption">
+              <p class="gallery-type">Propriétés viticoles</p>
+              <h3>Chai Gruaud 3 </h3>
+              <p>Réalisation carrelage</p>
+            </div>
+          </article>
+          <article class="gallery-card" data-filter="proprietes-viticoles">
+            <a href="galerie/proprietes-viticoles/proprietes-viticoles-chai-mise-en-lumiere-08.jpg" target="_blank" rel="noopener">
+              <img src="galerie/proprietes-viticoles/proprietes-viticoles-chai-mise-en-lumiere-08.jpg" alt="Chai — mise en lumière — Propriétés viticoles" loading="lazy">
+            </a>
+            <div class="gallery-caption">
+              <p class="gallery-type">Propriétés viticoles</p>
+              <h3>Chai — mise en lumière</h3>
+              <p>Réalisation carrelage</p>
+            </div>
+          </article>
+          <article class="gallery-card" data-filter="proprietes-viticoles">
+            <a href="galerie/proprietes-viticoles/proprietes-viticoles-chai-sol-gris-01.jpg" target="_blank" rel="noopener">
+              <img src="galerie/proprietes-viticoles/proprietes-viticoles-chai-sol-gris-01.jpg" alt="Chai — sol gris — Propriétés viticoles" loading="lazy">
+            </a>
+            <div class="gallery-caption">
+              <p class="gallery-type">Propriétés viticoles</p>
+              <h3>Chai — sol gris</h3>
+              <p>Réalisation carrelage</p>
+            </div>
+          </article>
+          <article class="gallery-card" data-filter="proprietes-viticoles">
+            <a href="galerie/proprietes-viticoles/proprietes-viticoles-propriete-viticole-09.jpg" target="_blank" rel="noopener">
+              <img src="galerie/proprietes-viticoles/proprietes-viticoles-propriete-viticole-09.jpg" alt="Propriété viticole — Propriétés viticoles" loading="lazy">
+            </a>
+            <div class="gallery-caption">
+              <p class="gallery-type">Propriétés viticoles</p>
+              <h3>Propriété viticole</h3>
+              <p>Réalisation carrelage</p>
+            </div>
+          </article>
+          <article class="gallery-card" data-filter="proprietes-viticoles">
+            <a href="galerie/proprietes-viticoles/proprietes-viticoles-rose-des-vents-10.jpg" target="_blank" rel="noopener">
+              <img src="galerie/proprietes-viticoles/proprietes-viticoles-rose-des-vents-10.jpg" alt="Rose des vents — Propriétés viticoles" loading="lazy">
+            </a>
+            <div class="gallery-caption">
+              <p class="gallery-type">Propriétés viticoles</p>
+              <h3>Rose des vents</h3>
+              <p>Réalisation carrelage</p>
+            </div>
+          </article>
+          <article class="gallery-card" data-filter="proprietes-viticoles">
+            <a href="galerie/proprietes-viticoles/proprietes-viticoles-sanitaires-publics-11.jpg" target="_blank" rel="noopener">
+              <img src="galerie/proprietes-viticoles/proprietes-viticoles-sanitaires-publics-11.jpg" alt="Sanitaires publics — Propriétés viticoles" loading="lazy">
+            </a>
+            <div class="gallery-caption">
+              <p class="gallery-type">Propriétés viticoles</p>
+              <h3>Sanitaires publics</h3>
+              <p>Réalisation carrelage</p>
+            </div>
+          </article>
+          <article class="gallery-card" data-filter="particuliers">
+            <a href="galerie/particuliers/particuliers-bas-d-escalier-01.jpg" target="_blank" rel="noopener">
+              <img src="galerie/particuliers/particuliers-bas-d-escalier-01.jpg" alt="Bas d’escalier — Particuliers" loading="lazy">
+            </a>
+            <div class="gallery-caption">
+              <p class="gallery-type">Particuliers</p>
+              <h3>Bas d’escalier</h3>
+              <p>Réalisation carrelage</p>
+            </div>
+          </article>
+          <article class="gallery-card" data-filter="particuliers">
+            <a href="galerie/particuliers/particuliers-cuisine-04.jpg" target="_blank" rel="noopener">
+              <img src="galerie/particuliers/particuliers-cuisine-04.jpg" alt="Cuisine — Particuliers" loading="lazy">
+            </a>
+            <div class="gallery-caption">
+              <p class="gallery-type">Particuliers</p>
+              <h3>Cuisine</h3>
+              <p>Réalisation carrelage</p>
+            </div>
+          </article>
+          <article class="gallery-card" data-filter="particuliers">
+            <a href="galerie/particuliers/particuliers-cuisine-beige-03.jpg" target="_blank" rel="noopener">
+              <img src="galerie/particuliers/particuliers-cuisine-beige-03.jpg" alt="Cuisine Beige — Particuliers" loading="lazy">
+            </a>
+            <div class="gallery-caption">
+              <p class="gallery-type">Particuliers</p>
+              <h3>Cuisine Beige</h3>
+              <p>Réalisation carrelage</p>
+            </div>
+          </article>
+          <article class="gallery-card" data-filter="particuliers">
+            <a href="galerie/particuliers/particuliers-cuisine-zellige-02.jpg" target="_blank" rel="noopener">
+              <img src="galerie/particuliers/particuliers-cuisine-zellige-02.jpg" alt="Cuisine — zellige — Particuliers" loading="lazy">
+            </a>
+            <div class="gallery-caption">
+              <p class="gallery-type">Particuliers</p>
+              <h3>Cuisine — zellige</h3>
+              <p>Réalisation carrelage</p>
+            </div>
+          </article>
+          <article class="gallery-card" data-filter="particuliers">
+            <a href="galerie/particuliers/particuliers-entree-05.jpg" target="_blank" rel="noopener">
+              <img src="galerie/particuliers/particuliers-entree-05.jpg" alt="Entree — Particuliers" loading="lazy">
+            </a>
+            <div class="gallery-caption">
+              <p class="gallery-type">Particuliers</p>
+              <h3>Entree</h3>
+              <p>Réalisation carrelage</p>
+            </div>
+          </article>
+          <article class="gallery-card" data-filter="particuliers">
+            <a href="galerie/particuliers/particuliers-salle-d-eau-verte-07.jpg" target="_blank" rel="noopener">
+              <img src="galerie/particuliers/particuliers-salle-d-eau-verte-07.jpg" alt="Salle d’eau verte — Particuliers" loading="lazy">
+            </a>
+            <div class="gallery-caption">
+              <p class="gallery-type">Particuliers</p>
+              <h3>Salle d’eau verte</h3>
+              <p>Réalisation carrelage</p>
+            </div>
+          </article>
+          <article class="gallery-card" data-filter="particuliers">
+            <a href="galerie/particuliers/particuliers-sdb-verte-2-06.jpg" target="_blank" rel="noopener">
+              <img src="galerie/particuliers/particuliers-sdb-verte-2-06.jpg" alt="Sdb Verte 2 — Particuliers" loading="lazy">
+            </a>
+            <div class="gallery-caption">
+              <p class="gallery-type">Particuliers</p>
+              <h3>Sdb Verte 2</h3>
+              <p>Réalisation carrelage</p>
+            </div>
+          </article>
+          <article class="gallery-card" data-filter="particuliers">
+            <a href="galerie/particuliers/particuliers-terrasse-piscine-2-08.jpg" target="_blank" rel="noopener">
+              <img src="galerie/particuliers/particuliers-terrasse-piscine-2-08.jpg" alt="Terrasse Piscine 2 — Particuliers" loading="lazy">
+            </a>
+            <div class="gallery-caption">
+              <p class="gallery-type">Particuliers</p>
+              <h3>Terrasse Piscine 2</h3>
+              <p>Réalisation carrelage</p>
+            </div>
+          </article>
+          <article class="gallery-card" data-filter="particuliers">
+            <a href="galerie/particuliers/particuliers-terrasse-exterieure-10.jpg" target="_blank" rel="noopener">
+              <img src="galerie/particuliers/particuliers-terrasse-exterieure-10.jpg" alt="Terrasse extérieure — Particuliers" loading="lazy">
+            </a>
+            <div class="gallery-caption">
+              <p class="gallery-type">Particuliers</p>
+              <h3>Terrasse extérieure</h3>
+              <p>Réalisation carrelage</p>
+            </div>
+          </article>
+          <article class="gallery-card" data-filter="particuliers">
+            <a href="galerie/particuliers/particuliers-terrasse-piscine-09.jpg" target="_blank" rel="noopener">
+              <img src="galerie/particuliers/particuliers-terrasse-piscine-09.jpg" alt="Terrasse piscine — Particuliers" loading="lazy">
+            </a>
+            <div class="gallery-caption">
+              <p class="gallery-type">Particuliers</p>
+              <h3>Terrasse piscine</h3>
+              <p>Réalisation carrelage</p>
+            </div>
+          </article>
+          <article class="gallery-card" data-filter="particuliers">
+            <a href="galerie/particuliers/particuliers-whatsapp-image-2026-06-10-at-14-37-20-11.jpg" target="_blank" rel="noopener">
+              <img src="galerie/particuliers/particuliers-whatsapp-image-2026-06-10-at-14-37-20-11.jpg" alt="Whatsapp Image 2026 06 10 At 14.37.20 — Particuliers" loading="lazy">
+            </a>
+            <div class="gallery-caption">
+              <p class="gallery-type">Particuliers</p>
+              <h3>Whatsapp Image 2026 06 10 At 14.37.20</h3>
+              <p>Réalisation carrelage</p>
+            </div>
+          </article>
+  </section>
+</main>
+
+<script>
+const tabs = document.querySelectorAll('.tab');
+const cards = document.querySelectorAll('.gallery-card');
+const empty = document.querySelector('.empty-gallery');
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const target = tab.dataset.target;
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    let visible = 0;
+    cards.forEach(card => {
+      const show = target === 'all' || card.dataset.filter === target;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    empty.hidden = visible !== 0;
+  });
+});
+</script>
+
+</body>
+</html>

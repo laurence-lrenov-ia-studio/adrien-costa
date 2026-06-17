@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carnet de références — Adrien Costa Carrelage</title>
+<style>
+:root{
+  --navy:#07182b;
+  --blue:#1057ad;
+  --blue2:#174a8f;
+  --ink:#0c1724;
+  --muted:#6f747b;
+  --line:#d7d0c6;
+  --paper:#f4f1ea;
+  --card:#fbfaf6;
+  --shadow:0 24px 60px rgba(7,24,43,.16);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 18% 8%, rgba(255,255,255,.95), transparent 32%),
+    radial-gradient(circle at 82% 20%, rgba(16,87,173,.10), transparent 28%),
+    linear-gradient(135deg,#e4dfd6 0%,#f7f5f0 38%,#ded9d0 100%);
+  padding:24px;
+}
+.page{
+  width:min(1160px,100%);
+  margin:0 auto;
+  background:rgba(251,250,246,.96);
+  border:1px solid rgba(215,208,198,.95);
+  border-radius:30px;
+  box-shadow:var(--shadow);
+  padding:34px;
+}
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  margin-bottom:26px;
+  border-bottom:1px solid var(--line);
+  padding-bottom:20px;
+}
+.logo{
+  width:220px;
+  max-width:45%;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:10px 14px;
+}
+.logo img{display:block;width:100%;height:auto}
+h1{
+  margin:0;
+  font-family:Georgia, "Times New Roman", serif;
+  font-weight:400;
+  color:var(--navy);
+  font-size:clamp(38px,5vw,62px);
+  line-height:1;
+}
+.kicker{
+  margin:10px 0 0;
+  color:var(--blue2);
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  font-size:12px;
+  font-weight:700;
+}
+.back{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+  color:#fff;
+  background:linear-gradient(135deg,var(--navy),var(--blue));
+  padding:12px 16px;
+  border-radius:12px;
+  font-weight:700;
+  white-space:nowrap;
+}
+.note{
+  margin:0 0 24px;
+  color:var(--muted);
+  line-height:1.6;
+  max-width:820px;
+}
+.book-shell{
+  position:relative;
+  perspective:1600px;
+}
+.book{
+  position:relative;
+  min-height:640px;
+  background:#eee8dc;
+  border:1px solid #d3c8b9;
+  border-radius:22px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.65),
+    0 22px 55px rgba(7,24,43,.14);
+  overflow:hidden;
+}
+.book::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:0;
+  bottom:0;
+  width:2px;
+  background:linear-gradient(#c5b9aa,#fff,#c5b9aa);
+  box-shadow:0 0 18px rgba(7,24,43,.14);
+  z-index:5;
+}
+.spread{
+  position:absolute;
+  inset:0;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  opacity:0;
+  transform:translateX(18px) rotateY(-2deg);
+  transition:opacity .35s ease, transform .45s ease;
+  pointer-events:none;
+}
+.spread.active{
+  opacity:1;
+  transform:translateX(0) rotateY(0);
+  pointer-events:auto;
+}
+.book-page{
+  position:relative;
+  padding:42px 42px 36px;
+  background:
+    linear-gradient(90deg, rgba(7,24,43,.04), transparent 18%),
+    repeating-linear-gradient(0deg, transparent 0 37px, rgba(7,24,43,.035) 38px),
+    #fffdf8;
+}
+.book-page.right{
+  background:
+    linear-gradient(270deg, rgba(7,24,43,.04), transparent 18%),
+    repeating-linear-gradient(0deg, transparent 0 37px, rgba(7,24,43,.035) 38px),
+    #fbfaf6;
+}
+.cover-page{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:
+    radial-gradient(circle at center, rgba(255,255,255,.72), transparent 48%),
+    linear-gradient(135deg,#07182b,#1057ad);
+  color:#fff;
+}
+.cover-inner{
+  width:min(380px,90%);
+  border:1px solid rgba(255,255,255,.42);
+  padding:52px 34px;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);
+}
+.cover-logo{
+  background:#fff;
+  border-radius:14px;
+  padding:12px 16px;
+  margin:0 auto 30px;
+  width:240px;
+  max-width:100%;
+}
+.cover-logo img{display:block;width:100%;height:auto}
+.cover-title{
+  font-family:Georgia, "Times New Roman", serif;
+  font-size:44px;
+  line-height:1;
+  margin:0 0 14px;
+  font-weight:400;
+}
+.cover-subtitle{
+  margin:0;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  font-size:12px;
+  color:rgba(255,255,255,.82);
+  font-weight:700;
+}
+.cover-note{
+  margin:20px 0 0;
+  color:rgba(255,255,255,.76);
+  font-family:Georgia, "Times New Roman", serif;
+  font-style:italic;
+  font-size:17px;
+}
+.page-number{
+  margin:0 0 20px;
+  color:var(--blue2);
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  font-size:12px;
+  font-weight:700;
+}
+.chapter{
+  margin:0 0 30px;
+}
+.chapter-title{
+  margin:0 0 16px;
+  font-family:Georgia, "Times New Roman", serif;
+  font-weight:400;
+  color:var(--navy);
+  font-size:36px;
+  line-height:1.05;
+}
+.calligraphy{
+  list-style:none;
+  margin:0;
+  padding:0;
+  columns:2;
+  column-gap:28px;
+}
+.calligraphy li{
+  break-inside:avoid;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:7px 0 11px;
+  margin:0 0 6px;
+  color:#18263a;
+  font-family:"Brush Script MT", "Segoe Script", "Lucida Handwriting", cursive;
+  font-size:30px;
+  line-height:1.05;
+  border-bottom:1px solid rgba(16,87,173,.12);
+}
+.mini-icon{
+  width:27px;
+  height:27px;
+  flex:0 0 27px;
+  fill:none;
+  stroke:var(--blue2);
+  stroke-width:2.1;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  filter:drop-shadow(0 2px 3px rgba(7,24,43,.12));
+}
+.sign-card{
+  border-left:3px solid var(--blue);
+  padding:15px 0 15px 18px;
+  margin:0 0 18px;
+  background:linear-gradient(90deg, rgba(239,237,231,.88), transparent);
+}
+.sign-card h2{
+  margin:0;
+  font-family:Georgia, "Times New Roman", serif;
+  color:var(--navy);
+  font-weight:400;
+  font-size:27px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.sign-card p{
+  margin:7px 0 0;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.45;
+}
+.signature-line{
+  margin-top:26px;
+  padding-top:20px;
+  border-top:1px solid var(--line);
+  color:var(--blue2);
+  font-family:Georgia, "Times New Roman", serif;
+  font-style:italic;
+  font-size:17px;
+}
+.controls{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  margin-top:20px;
+}
+.control-btn{
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--navy);
+  padding:12px 16px;
+  border-radius:999px;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 8px 18px rgba(7,24,43,.06);
+}
+.control-btn:hover{
+  border-color:var(--blue);
+  color:var(--blue2);
+}
+.control-btn:disabled{
+  opacity:.38;
+  cursor:not-allowed;
+}
+.page-indicator{
+  color:var(--muted);
+  font-size:13px;
+  min-width:90px;
+  text-align:center;
+}
+.flip-hint{
+  text-align:center;
+  margin:10px 0 0;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.summary-list{display:grid;gap:14px;margin-top:22px}
+.summary-item{display:flex;gap:14px;align-items:flex-start;padding:15px 16px;border-left:4px solid var(--blue);background:linear-gradient(90deg,rgba(239,237,231,.90),rgba(255,255,255,.45))}
+.summary-item.gold{border-left-color:#b58b4a}.summary-item.green{border-left-color:#526b4e}.summary-item.terra{border-left-color:#9f6549}.summary-item.blue{border-left-color:#1057ad}
+.summary-dot{width:14px;height:14px;margin-top:6px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 4px rgba(16,87,173,.10);flex:0 0 14px}
+.summary-item.gold .summary-dot{background:#b58b4a}.summary-item.green .summary-dot{background:#526b4e}.summary-item.terra .summary-dot{background:#9f6549}
+.summary-item h2{margin:0;font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:24px;color:var(--navy)}
+.summary-item p{margin:5px 0 0;color:var(--muted);line-height:1.4;font-size:14px}
+.accent-camp{border-left-color:#9f6549}
+.closing-page{display:flex;align-items:center;justify-content:center;text-align:center}
+.closing-card{max-width:390px;padding:42px 34px;border:1px solid var(--line);background:rgba(255,255,255,.66);box-shadow:0 18px 36px rgba(7,24,43,.08)}
+.closing-logo{width:190px;margin:0 auto 30px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 14px}
+.closing-logo img{width:100%;display:block;height:auto}
+.closing-title{margin:0;font-family:Georgia,"Times New Roman",serif;color:var(--navy);font-weight:400;font-size:34px;line-height:1.05}
+.closing-text{margin:18px 0 0;color:var(--blue2);font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:20px;line-height:1.35}
+
+
+.properties-one-page{
+  columns:2;
+  column-gap:22px;
+}
+.properties-one-page li{
+  font-size:24px;
+  padding:4px 0 7px;
+  margin-bottom:3px;
+}
+.properties-one-page .mini-icon{
+  width:22px;
+  height:22px;
+  flex-basis:22px;
+}
+
+@media(max-width:900px){
+  body{padding:0}
+  .page{border-radius:0;padding:22px 18px;min-height:100vh}
+  .header{align-items:flex-start;flex-direction:column}
+  .logo{max-width:100%;width:250px}
+  .book{min-height:760px}
+  .book::before{display:none}
+  .spread{grid-template-columns:1fr;overflow:auto}
+  .book-page{padding:30px 24px}
+  .book-page.right{display:none}
+  .calligraphy{columns:1}
+  .controls{position:sticky;bottom:0;background:rgba(244,241,234,.92);padding:12px 0}
+}
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="header">
+    <div>
+      <h1>Carnet de références</h1>
+      <p class="kicker">Livre d’or professionnel</p>
+    </div>
+    <div class="logo"><img src="logo.png" alt="SARL Adrien Costa Carrelage"></div>
+    <a class="back" href="index.html">← Retour carte</a>
+  </header>
+
+  <p class="note">Un carnet de références feuilletable, organisé par type de chantier.</p>
+
+  <section class="book-shell" aria-label="Carnet de références feuilletable">
+    <div class="book">
+
+      <article class="spread active" data-spread="1">
+        <div class="book-page cover-page">
+          <div class="cover-inner">
+            <div class="cover-logo"><img src="logo.png" alt="SARL Adrien Costa Carrelage"></div>
+            <p class="cover-title">Carnet de références</p>
+            <p class="cover-subtitle">Livre d’or professionnel</p>
+            <p class="cover-note">Propriétés viticoles · collectivités · campings · particuliers</p>
+          </div>
+        </div>
+        <div class="book-page right">
+          <p class="page-number">Ouverture</p>
+          <section class="chapter">
+            <h2 class="chapter-title">Sommaire</h2>
+            <div class="summary-list">
+              <div class="summary-item gold"><span class="summary-dot"></span><div><h2>Propriétés viticoles</h2><p>Références de domaines, chais et espaces d’accueil.</p></div></div>
+              <div class="summary-item green"><span class="summary-dot"></span><div><h2>Collectivités</h2><p>Mairie de Cissac · Communauté de Communes Médoc Cœur de Presqu’île.</p></div></div>
+              <div class="summary-item blue"><span class="summary-dot"></span><div><h2>Équipements publics</h2><p>Crématorium de Pauillac · marchés publics.</p></div></div>
+              <div class="summary-item terra"><span class="summary-dot"></span><div><h2>Campings</h2><p>MS Vacances · espaces communs et sanitaires.</p></div></div>
+              <div class="summary-item"><span class="summary-dot"></span><div><h2>Clients professionnels & particuliers</h2><p>Rénovations intérieures, terrasses, cuisines et salles d’eau.</p></div></div>
+            </div>
+          </section>
+        </div>
+      </article>
+
+      <article class="spread" data-spread="2">
+        <div class="book-page">
+          <p class="page-number">Page 01</p>
+          <section class="chapter">
+            <h2 class="chapter-title">Propriétés viticoles</h2>
+            <ul class="calligraphy properties-one-page">
+              <li><svg class="mini-icon estate" viewBox="0 0 80 64" aria-hidden="true">
+  <path d="M10 54h60"/>
+  <path d="M18 54V31h44v23"/>
+  <path d="M14 31h52L40 15 14 31Z"/>
+  <path d="M28 54V40h24v14"/>
+  <path d="M25 35h5M37.5 35h5M50 35h5"/>
+  <path d="M15 58c8-5 17-5 25 0s17 5 25 0"/>
+  <path d="M20 62c7-4 14-4 21 0s14 4 21 0"/>
+</svg><span>Gruaud Larose</span></li>
+              <li><svg class="mini-icon estate" viewBox="0 0 80 64" aria-hidden="true">
+  <path d="M10 54h60"/>
+  <path d="M18 54V31h44v23"/>
+  <path d="M14 31h52L40 15 14 31Z"/>
+  <path d="M28 54V40h24v14"/>
+  <path d="M25 35h5M37.5 35h5M50 35h5"/>
+  <path d="M15 58c8-5 17-5 25 0s17 5 25 0"/>
+  <path d="M20 62c7-4 14-4 21 0s14 4 21 0"/>
+</svg><span>Clarke</span></li>
+              <li><svg class="mini-icon estate" viewBox="0 0 80 64" aria-hidden="true">
+  <path d="M10 54h60"/>
+  <path d="M18 54V31h44v23"/>
+  <path d="M14 31h52L40 15 14 31Z"/>
+  <path d="M28 54V40h24v14"/>
+  <path d="M25 35h5M37.5 35h5M50 35h5"/>
+  <path d="M15 58c8-5 17-5 25 0s17 5 25 0"/>
+  <path d="M20 62c7-4 14-4 21 0s14 4 21 0"/>
+</svg><span>Pichon Baron</span></li>
+              <li><svg class="mini-icon estate" viewBox="0 0 80 64" aria-hidden="true">
+  <path d="M10 54h60"/>
+  <path d="M18 54V31h44v23"/>
+  <path d="M14 31h52L40 15 14 31Z"/>
+  <path d="M28 54V40h24v14"/>
+  <path d="M25 35h5M37.5 35h5M50 35h5"/>
+  <path d="M15 58c8-5 17-5 25 0s17 5 25 0"/>
+  <path d="M20 62c7-4 14-4 21 0s14 4 21 0"/>
+</svg><span>Pichon Comtesse</span></li>
+              <li><svg class="mini-icon estate" viewBox="0 0 80 64" aria-hidden="true">
+  <path d="M10 54h60"/>
+  <path d="M18 54V31h44v23"/>
+  <path d="M14 31h52L40 15 14 31Z"/>
+  <path d="M28 54V40h24v14"/>
+  <path d="M25 35h5M37.5 35h5M50 35h5"/>
+  <path d="M15 58c8-5 17-5 25 0s17 5 25 0"/>
+  <path d="M20 62c7-4 14-4 21 0s14 4 21 0"/>
+</svg><span>Beychevelle</span></li>
+              <li><svg class="mini-icon estate" viewBox="0 0 80 64" aria-hidden="true">
+  <path d="M10 54h60"/>
+  <path d="M18 54V31h44v23"/>
+  <path d="M14 31h52L40 15 14 31Z"/>
+  <path d="M28 54V40h24v14"/>
+  <path d="M25 35h5M37.5 35h5M50 35h5"/>
+  <path d="M15 58c8-5 17-5 25 0s17 5 25 0"/>
+  <path d="M20 62c7-4 14-4 21 0s14 4 21 0"/>
+</svg><span>Durfort-Vivens</span></li>
+              <li><svg class="mini-icon estate" viewBox="0 0 80 64" aria-hidden="true">
+  <path d="M10 54h60"/>
+  <path d="M18 54V31h44v23"/>
+  <path d="M14 31h52L40 15 14 31Z"/>
+  <path d="M28 54V40h24v14"/>
+  <path d="M25 35h5M37.5 35h5M50 35h5"/>
+  <path d="M15 58c8-5 17-5 25 0s17 5 25 0"/>
+  <path d="M20 62c7-4 14-4 21 0s14 4 21 0"/>
+</svg><span>Ducru</span></li>
+              <li><svg class="mini-icon estate" viewBox="0 0 80 64" aria-hidden="true">
+  <path d="M10 54h60"/>
+  <path d="M18 54V31h44v23"/>
+  <path d="M14 31h52L40 15 14 31Z"/>
+  <path d="M28 54V40h24v14"/>
+  <path d="M25 35h5M37.5 35h5M50 35h5"/>
+  <path d="M15 58c8-5 17-5 25 0s17 5 25 0"/>
+  <path d="M20 62c7-4 14-4 21 0s14 4 21 0"/>
+</svg><span>Palmer</span></li>
+              <li><svg class="mini-icon estate" viewBox="0 0 80 64" aria-hidden="true">
+  <path d="M10 54h60"/>
+  <path d="M18 54V31h44v23"/>
+  <path d="M14 31h52L40 15 14 31Z"/>
+  <path d="M28 54V40h24v14"/>
+  <path d="M25 35h5M37.5 35h5M50 35h5"/>
+  <path d="M15 58c8-5 17-5 25 0s17 5 25 0"/>
+  <path d="M20 62c7-4 14-4 21 0s14 4 21 0"/>
+</svg><span>Brane-Cantenac</span></li>
+              <li><svg class="mini-icon estate" viewBox="0 0 80 64" aria-hidden="true">
+  <path d="M10 54h60"/>
+  <path d="M18 54V31h44v23"/>
+  <path d="M14 31h52L40 15 14 31Z"/>
+  <path d="M28 54V40h24v14"/>
+  <path d="M25 35h5M37.5 35h5M50 35h5"/>
+  <path d="M15 58c8-5 17-5 25 0s17 5 25 0"/>
+  <path d="M20 62c7-4 14-4 21 0s14 4 21 0"/>
+</svg><span>Clerc Milon</span></li>
+              <li><svg class="mini-icon estate" viewBox="0 0 80 64" aria-hidden="true">
+  <path d="M10 54h60"/>
+  <path d="M18 54V31h44v23"/>
+  <path d="M14 31h52L40 15 14 31Z"/>
+  <path d="M28 54V40h24v14"/>
+  <path d="M25 35h5M37.5 35h5M50 35h5"/>
+  <path d="M15 58c8-5 17-5 25 0s17 5 25 0"/>
+  <path d="M20 62c7-4 14-4 21 0s14 4 21 0"/>
+</svg><span>Mouton Rothschild</span></li>
+              <li><svg class="mini-icon estate" viewBox="0 0 80 64" aria-hidden="true">
+  <path d="M10 54h60"/>
+  <path d="M18 54V31h44v23"/>
+  <path d="M14 31h52L40 15 14 31Z"/>
+  <path d="M28 54V40h24v14"/>
+  <path d="M25 35h5M37.5 35h5M50 35h5"/>
+  <path d="M15 58c8-5 17-5 25 0s17 5 25 0"/>
+  <path d="M20 62c7-4 14-4 21 0s14 4 21 0"/>
+</svg><span>Gloria</span></li>
+              <li><svg class="mini-icon estate" viewBox="0 0 80 64" aria-hidden="true">
+  <path d="M10 54h60"/>
+  <path d="M18 54V31h44v23"/>
+  <path d="M14 31h52L40 15 14 31Z"/>
+  <path d="M28 54V40h24v14"/>
+  <path d="M25 35h5M37.5 35h5M50 35h5"/>
+  <path d="M15 58c8-5 17-5 25 0s17 5 25 0"/>
+  <path d="M20 62c7-4 14-4 21 0s14 4 21 0"/>
+</svg><span>Castéra</span></li>
+            </ul>
+          </section>
+        </div>
+        <div class="book-page right">
+          <p class="page-number">Page 02</p>
+          <section class="chapter">
+            <h2 class="chapter-title">Collectivités</h2>
+            <div class="sign-card"><h2><svg class="mini-icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M12 54h40"/><path d="M18 54V24h28v30"/><path d="M14 24h36L32 12 14 24Z"/><path d="M24 54V36h16v18"/><path d="M24 29h4M36 29h4"/></svg> Mairie de Cissac</h2><p>Référence collectivité.</p></div>
+            <div class="sign-card"><h2><svg class="mini-icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M12 54h40"/><path d="M18 54V24h28v30"/><path d="M14 24h36L32 12 14 24Z"/><path d="M24 54V36h16v18"/><path d="M24 29h4M36 29h4"/></svg> Communauté de Communes Médoc Cœur de Presqu’île</h2><p>Référence institutionnelle.</p></div>
+          </section>
+        </div>
+      </article>
+
+      <article class="spread" data-spread="3">
+        <div class="book-page">
+          <p class="page-number">Page 03</p>
+          <section class="chapter">
+            <h2 class="chapter-title">Équipements publics</h2>
+            <div class="sign-card"><h2><svg class="mini-icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M12 54h40"/><path d="M18 54V24h28v30"/><path d="M14 24h36L32 12 14 24Z"/><path d="M24 54V36h16v18"/><path d="M24 29h4M36 29h4"/></svg> Crématorium de Pauillac</h2><p>Équipement recevant du public.</p></div>
+            <div class="sign-card"><h2><svg class="mini-icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M12 54h40"/><path d="M18 54V24h28v30"/><path d="M14 24h36L32 12 14 24Z"/><path d="M24 54V36h16v18"/><path d="M24 29h4M36 29h4"/></svg> Marchés publics</h2><p>Références publiques et interventions pour structures publiques.</p></div>
+          </section>
+        </div>
+        <div class="book-page right">
+          <p class="page-number">Page 04</p>
+          <section class="chapter">
+            <h2 class="chapter-title">Campings</h2>
+            <div class="sign-card accent-camp"><h2><svg class="mini-icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M10 52h44"/><path d="M18 52 32 18l14 34"/><path d="M25 52 32 35l7 17"/><path d="M32 18v34"/></svg> MS Vacances</h2><p>Sanitaires, terrasses, espaces communs et rénovations ciblées.</p></div>
+          </section>
+        </div>
+      </article>
+
+      <article class="spread" data-spread="4">
+        <div class="book-page">
+          <p class="page-number">Page 05</p>
+          <section class="chapter">
+            <h2 class="chapter-title">Clients</h2>
+            <div class="sign-card"><h2><svg class="mini-icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 31a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z"/><path d="M14 54c2.7-11 10-17 18-17s15.3 6 18 17"/></svg> Clients professionnels</h2><p>Espaces de travail, accueil, sanitaires, sols et rénovations.</p></div>
+            <div class="sign-card"><h2><svg class="mini-icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 31a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z"/><path d="M14 54c2.7-11 10-17 18-17s15.3 6 18 17"/></svg> Clients particuliers</h2><p>Salles d’eau, cuisines, terrasses, escaliers et rénovations intérieures.</p></div>
+          </section>
+        </div>
+        <div class="book-page right closing-page">
+          <div class="closing-card">
+            <div class="closing-logo"><img src="logo.png" alt="SARL Adrien Costa Carrelage"></div>
+            <p class="closing-title">Merci pour votre lecture</p>
+            <p class="closing-text">Pour une future collaboration, n’hésitez pas à me contacter.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="controls">
+      <button class="control-btn" id="prevPage" type="button">← Page précédente</button>
+      <span class="page-indicator" id="pageIndicator">1 / 4</span>
+      <button class="control-btn" id="nextPage" type="button">Tourner la page →</button>
+    </div>
+    <p class="flip-hint">Clique sur “Tourner la page” pour feuilleter le carnet.</p>
+  </section>
+</main>
+
+<script>
+const spreads = Array.from(document.querySelectorAll('.spread'));
+const prev = document.getElementById('prevPage');
+const next = document.getElementById('nextPage');
+const indicator = document.getElementById('pageIndicator');
+let current = 0;
+
+function renderBook() {
+  spreads.forEach((spread, index) => {
+    spread.classList.toggle('active', index === current);
+  });
+  prev.disabled = current === 0;
+  next.disabled = current === spreads.length - 1;
+  indicator.textContent = `${current + 1} / ${spreads.length}`;
+}
+
+prev.addEventListener('click', () => {
+  if (current > 0) {
+    current--;
+    renderBook();
+  }
+});
+
+next.addEventListener('click', () => {
+  if (current < spreads.length - 1) {
+    current++;
+    renderBook();
+  }
+});
+
+renderBook();
+</script>
+</body>
+</html>
