@@ -340,6 +340,59 @@ h1{
   flex-basis:22px;
 }
 
+
+.clients-chapter{
+  min-height:520px;
+  display:flex;
+  flex-direction:column;
+}
+.clients-pro-card{
+  margin-bottom:20px;
+}
+.pro-references{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin:18px 0 72px;
+  padding-left:22px;
+}
+.pro-ref-card{
+  border:1px solid rgba(16,87,173,.18);
+  border-left:4px solid var(--blue);
+  background:linear-gradient(135deg, rgba(255,255,255,.86), rgba(239,237,231,.72));
+  padding:14px 16px;
+  box-shadow:0 8px 18px rgba(7,24,43,.05);
+}
+.pro-ref-label{
+  display:block;
+  margin-bottom:6px;
+  color:var(--blue2);
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-weight:700;
+}
+.pro-ref-card strong{
+  display:block;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:24px;
+  color:var(--navy);
+  font-weight:400;
+}
+.clients-private-card{
+  margin-top:auto;
+}
+@media(max-width:900px){
+  .pro-references{
+    grid-template-columns:1fr;
+    margin-bottom:32px;
+    padding-left:0;
+  }
+  .clients-chapter{
+    min-height:auto;
+  }
+}
+
 @media(max-width:900px){
   body{padding:0}
   .page{border-radius:0;padding:22px 18px;min-height:100vh}
@@ -544,7 +597,7 @@ h1{
           <p class="page-number">Page 04</p>
           <section class="chapter">
             <h2 class="chapter-title">Campings</h2>
-            <div class="sign-card accent-camp"><h2><svg class="mini-icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M10 52h44"/><path d="M18 52 32 18l14 34"/><path d="M25 52 32 35l7 17"/><path d="M32 18v34"/></svg> MS Vacances</h2><p>Sanitaires, terrasses, espaces communs et rénovations ciblées.</p></div>
+            <div class="sign-card accent-camp"><h2><svg class="mini-icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M10 52h44"/><path d="M18 52 32 18l14 34"/><path d="M25 52 32 35l7 17"/><path d="M32 18v34"/></svg> MS Vacances Montalivet</h2><p>Sanitaires, terrasses, espaces communs et rénovations ciblées.</p></div>
           </section>
         </div>
       </article>
@@ -552,10 +605,29 @@ h1{
       <article class="spread" data-spread="4">
         <div class="book-page">
           <p class="page-number">Page 05</p>
-          <section class="chapter">
+          <section class="chapter clients-chapter">
             <h2 class="chapter-title">Clients</h2>
-            <div class="sign-card"><h2><svg class="mini-icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 31a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z"/><path d="M14 54c2.7-11 10-17 18-17s15.3 6 18 17"/></svg> Clients professionnels</h2><p>Espaces de travail, accueil, sanitaires, sols et rénovations.</p></div>
-            <div class="sign-card"><h2><svg class="mini-icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 31a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z"/><path d="M14 54c2.7-11 10-17 18-17s15.3 6 18 17"/></svg> Clients particuliers</h2><p>Salles d’eau, cuisines, terrasses, escaliers et rénovations intérieures.</p></div>
+
+            <div class="sign-card clients-pro-card">
+              <h2><svg class="mini-icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 31a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z"/><path d="M14 54c2.7-11 10-17 18-17s15.3 6 18 17"/></svg> Clients professionnels</h2>
+              <p>Espaces de travail, accueil, sanitaires, sols et rénovations.</p>
+            </div>
+
+            <div class="pro-references">
+              <div class="pro-ref-card">
+                <span class="pro-ref-label">Référence professionnelle</span>
+                <strong>Station Total</strong>
+              </div>
+              <div class="pro-ref-card">
+                <span class="pro-ref-label">Référence professionnelle</span>
+                <strong>Bière Mira</strong>
+              </div>
+            </div>
+
+            <div class="sign-card clients-private-card">
+              <h2><svg class="mini-icon" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 31a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z"/><path d="M14 54c2.7-11 10-17 18-17s15.3 6 18 17"/></svg> Clients particuliers</h2>
+              <p>Salles d’eau, cuisines, terrasses, escaliers et rénovations intérieures.</p>
+            </div>
           </section>
         </div>
         <div class="book-page right closing-page">
