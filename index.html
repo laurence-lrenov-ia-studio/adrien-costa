@@ -524,6 +524,58 @@
       h1{font-size:48px;}
       .name{font-size:30px;}
     }
+
+    /* Mode accueil / carte séparée */
+    .page {
+      min-height: calc(100vh - 48px);
+    }
+
+    body:not(.card-open) .details {
+      display: none;
+    }
+
+    body:not(.card-open) .page {
+      grid-template-columns: minmax(0, 720px);
+      justify-content: center;
+    }
+
+    body.card-open .landing {
+      display: none;
+    }
+
+    body.card-open .page {
+      grid-template-columns: minmax(0, 720px);
+      justify-content: center;
+    }
+
+    body.card-open .details {
+      display: block;
+    }
+
+    .enter {
+      width: 100%;
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .back-home {
+      appearance: none;
+      border: 1px solid rgba(215,208,198,.92);
+      background: rgba(255,255,255,.72);
+      color: var(--blue2);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-bottom: 18px;
+    }
+
+    .back-home:hover {
+      border-color: var(--blue);
+      color: var(--navy);
+    }
+
   </style>
 </head>
 <body>
@@ -544,15 +596,16 @@
           <img src="visuel-carte.png" alt="Réalisation carrelage et miroir rétroéclairé" />
         </figure>
 
-        <a class="enter" href="#contact">
+        <button class="enter" type="button" id="openCard">
           <span>Entrer sur la carte digitale</span>
           <span>→</span>
-        </a>
+        </button>
       </div>
 
     </section>
 
     <section id="contact" class="panel details" aria-label="Carte de visite digitale">
+      <button class="back-home" type="button" id="backHome">← Retour accueil</button>
       <div class="mini">
         <div class="mini-logo">
           <img src="logo.png" alt="SARL Adrien Costa Carrelage" />
@@ -590,5 +643,24 @@
       </a>
     </section>
   </main>
+
+  <script>
+    const openCardButton = document.getElementById('openCard');
+    const backHomeButton = document.getElementById('backHome');
+
+    function openCard() {
+      document.body.classList.add('card-open');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function backHome() {
+      document.body.classList.remove('card-open');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    openCardButton?.addEventListener('click', openCard);
+    backHomeButton?.addEventListener('click', backHome);
+  </script>
+
 </body>
 </html>
